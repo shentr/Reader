@@ -1,0 +1,36 @@
+{
+  "name": "booklover",
+  "version": "1.0.0",
+  "description": "This is a online book reader for mobile",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shentr/Reader.git"
+  },
+  "keywords": [
+    "reader",
+    "book",
+    "ebook",
+    "电子书",
+    "阅读器",
+    "书城"
+  ],
+  "author": "shentr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shentr/Reader/issues"
+  },
+  "homepage": "https://github.com/shentr/Reader#readme",
+  "dependencies": {
+    "co-views": "^2.1.0",
+    "ejs": "^2.5.6",
+    "koa": "^2.1.0",
+    "koa-route": "^3.2.0",
+    "koa-router": "^7.0.1",
+    "koa-static-server": "^1.0.0",
+    "webpack": "^2.2.1"
+  }
+}

@@ -14,7 +14,11 @@
 			body{
                 text-align: left;
                 width:100%;
+                max-width: 640px;
+                margin:auto;
                 overflow: hidden;
+            }
+            .container{
                 background-color: #e9dfc7;
             }
             .m-read-content{
@@ -59,14 +63,15 @@
             .m-button-bar{
                 width: 70%;
                 max-width: 800px;
-                padding:5px;
-                margin:10px auto;
+                padding:8px 15%;
+                margin-top: -2px;
             }
             .top-nav{
                 position:fixed;
                 top:0;
                 height: 50px;
                 width: 100%;
+                max-width: 640px;
                 z-index: 9999;
                 background: #000;
             }
@@ -90,6 +95,7 @@
                 bottom:0;
                 height: 70px;
                 width: 100%;
+                max-width: 640px;
                 z-index: 9999;
                 background: #000;
                 opacity: 0.9;
@@ -99,6 +105,7 @@
                 bottom:0;
                 height: 75px;
                 width: 100%;
+                max-width: 500px;
                 z-index: 9999;
             }
             .bottom-nav-icons{
@@ -171,7 +178,7 @@
                 height:135px;
                 background: #000;
                 opacity: 0.9;
-                z-index: 10000;
+                z-index: 10003;
             }
             .nav-pannel{
                 position:fixed;
@@ -180,7 +187,7 @@
                 height:135px;
                 background: none;
                 color:#fff;
-                z-index: 10001;
+                z-index: 10003;
             }
             .child-mod{
                 padding:5px 10px;
@@ -263,18 +270,15 @@
             </div>
 			<div id="fiction_container" class="m-read-content">         <!--文字内容层-->
                 <div id="fiction_chapter_title"></div>
-                <h4>Ajax 的底层实现</h4>
-				<p>我们知道 Ajax 的底层实现其实是很简单的(抛开IE不说)，标准的 w3c 直接提供了 XMLHttpRequest 方法。我们主要站在设计的角度来理解，如何设计出低耦合高内聚的代码 jQuery 对 Ajax 的处理主要体现在对浏览器兼容，数据的处理过滤以及各种事件的封装上，主要有以下几部分扩展：</p>
-				<p>我们知道 Ajax 的底层实现其实是很简单的(抛开IE不说)，标准的 w3c 直接提供了 XMLHttpRequest 方法。我们主要站在设计的角度来理解，如何设计出低耦合高内聚的代码 jQuery 对 Ajax 的处理主要体现在对浏览器兼容，数据的处理过滤以及各种事件的封装上，主要有以下几部分扩展：</p>
-				<p>我们知道 Ajax 的底层实现其实是很简单的(抛开IE不说)，标准的 w3c 直接提供了 XMLHttpRequest 方法。我们主要站在设计的角度来理解，如何设计出低耦合高内聚的代码 jQuery 对 Ajax 的处理主要体现在对浏览器兼容，数据的处理过滤以及各种事件的封装上，主要有以下几部分扩展：</p>
-				<p>我们知道 Ajax 的底层实现其实是很简单的(抛开IE不说)，标准的 w3c 直接提供了 XMLHttpRequest 方法。我们主要站在设计的角度来理解，如何设计出低耦合高内聚的代码 jQuery 对 Ajax 的处理主要体现在对浏览器兼容，数据的处理过滤以及各种事件的封装上，主要有以下几部分扩展：</p>
-                <div class="m-button-bar">                          <!--章节切换按钮-->
-                    <ul class="u-tab">
-                        <li id="prev_button">上一章</li>
-                        <li id="next_button">下一章</li>
-                    </ul>
-                </div>
+                <!--<h4>标题</h4>
+                <p>内容</p>-->
 			</div>
+            <div class="m-button-bar">                          <!--章节切换按钮-->
+                <ul class="u-tab">
+                    <li id="prev_button">上一章</li>
+                    <li id="next_button">下一章</li>
+                </ul>
+            </div>
 
             <div class="bottom-nav-opacity bottomNav" style="display:none"></div>     <!--下边栏-->
             <div id="bottom-nav" class="bottom-nav bottomNav" style="display:none">       <!--一级下边栏--><!--给js用的class驼峰命名-->
@@ -326,19 +330,20 @@
                 </div>
             </div>
 		</div>
-		
-		<script src="lib/zepto.min.js"></script>
+
+		<script src="/lib/zepto.min.js"></script>
 		<script>
 			window.jQuery = $;
 		</script>
-		<script src="js/jquery.base64.js"></script>
-		<script src="js/jquery.jsonp.js"></script>
+		<script src="/js/jquery.base64.js"></script>
+		<script src="/js/jquery.jsonp.js"></script>
 
 
 
 
 		<script>
             (function () {
+                'use strict';
                 var dom = {                                                 //变量缓存
                     topNav: $('#top-nav'),
                     bottomNav: $('.bottomNav'),
@@ -346,7 +351,8 @@
                     iconDayStatus: $('.icon-day-status'),
                     fontContainer:$('.fontContainer'),
                     fictionContainer:$('#fiction_container'),
-                    dayStatusFont:$('#dayStatusFont')
+                    dayStatusFont:$('#dayStatusFont'),
+                    buttonBar: $('.m-button-bar')
                 },
                     win = $(window),
                     doc = $(document),
@@ -359,7 +365,7 @@
                         'color4': '#C7EDCC',
                         'color5': '#2b5c78'
                     },
-                    fontColorTOHex = {
+                    fontColorToHex = {
                         'color1': '#555',
                         'color2': '#555',
                         'color3': '#b0b5e9',
@@ -367,6 +373,9 @@
                         'color5': '#a7c2c2'
                     },
                     dayFlag;
+
+                var readModel,
+                    readerUi;
 
                 var  Utils = (function () {
                     var prefix =  'html5_reader_';
@@ -376,9 +385,22 @@
                     var storageSetter = function (key, value) {
                         return localStorage.setItem(prefix + key, value);
                     };
+                    var getJsonP = function (url, callback) {
+                        return $.jsonp({
+                            url: url,
+                            callback: 'duokan_fiction_chapter',
+                            cache: true,
+                            success: function (result) {
+                                var data = $.base64.decode(result);
+                                var json = decodeURIComponent(escape(data));
+                                callback && callback(json);
+                            }
+                        });
+                    };
                     return {
                         storageGetter: storageGetter,
-                        storageSetter: storageSetter
+                        storageSetter: storageSetter,
+                        getJsonP: getJsonP
                     }
                 })();
 
@@ -386,15 +408,119 @@
                 dom.fictionContainer.css('font-size',initFontSize);
                 initBkColor = Utils.storageGetter('backgroundColor') || 'color2';
                 dom.fictionContainer.css('background-color',colorToHex[initBkColor]);
-                dom.fictionContainer.css('color',fontColorTOHex[initBkColor]);
+                dom.buttonBar.css('background-color',colorToHex[initBkColor]);
+                dom.fictionContainer.css('color',fontColorToHex[initBkColor]);
 
-                function readerModel() {                                            /*Model*/
+                function ReadModel() {                                            /*Model*/
                     //TODO 阅读器和服务器数据交互，model层
+                    var chapterId;
+                    var chapterTotal;
+                    var init = function (Uicallback) {
+                        chapterId = parseInt(Utils.storageGetter('chapterId'));
+                        /*getFictionInfoPromise.then(function () {
+                                //TODO 获得章节内容后回调
+                                return getCurChapterContentPromise;
+                            }).then(function () {
+                            }
+                        );*/
+                        getFictionInfo(function () {
+                            getCurChapterContent(chapterId, function (data) {
+                                //TODO 获得章节内容后回调
+                                Uicallback && Uicallback(data);
+                            });
+                        });
+                    };
+
+                    /*var getFictionInfoPromise = new Promise((resolve, reject) => {
+                            $.get('data/chapter.json',function (data) {
+                            //TODO 获得章节后的回调
+                            if(data.result == 0){
+                                chapterId = Utils.storageGetter('chapterId');
+                                chapterId = chapterId ? chapterId : data.chapters[1].chapter_id;
+                                chapterTotal = data.chapters.length;
+                                resolve();
+                            }else{
+                                reject();
+                            }
+                        }, 'json');
+                    });*/
+                    var getFictionInfo = function (callback) {
+                        $.get('/data/chapter.json',function (data) {
+                            //TODO 获得章节后的回调
+                            chapterId = Utils.storageGetter('chapterId');
+                            chapterId = chapterId ? chapterId : data.chapters[1].chapter_id;
+                            chapterTotal = data.chapters.length;
+                            console.log(data);
+                            callback && callback();
+                        }, 'json');
+                    };
+                    /*var getCurChapterContentPromise = new Promise((resolve,reject) =>{
+                        $.get('/data/data' + chapterId + '.json',function (data) {
+                            if(data.result === 0){                      //状态:成功
+                                var url=data.jsonp;
+                                Utils.getJsonP(url, function (data) {
+                                    resolve(data);
+                                });
+                            }else{
+                                reject();
+                            }
+                        }, 'json');
+                    });*/
+
+
+                    var getCurChapterContent = function (chapterId, callback) {
+                        $.get('/data/data' + chapterId + '.json',function (data) {
+                            if(data.result === 0){                      //状态:成功
+                                var url=data.jsonp;
+                                Utils.getJsonP(url, function (data) {
+                                    callback && callback(data);
+                                });
+                            }
+                        }, 'json');
+                    };
+                    var preChapter = function (Uicallback) {
+                        chapterId = parseInt(chapterId, 10);
+                        if(chapterId === 0){
+                            return;
+                        }
+                        chapterId--;
+                        getCurChapterContent(chapterId, Uicallback);
+                        Utils.storageSetter('chapterId',chapterId);
+                    };
+                    var nextChapter = function (Uicallback) {
+                        console.log(chapterId);
+                        chapterId = parseInt(chapterId, 10);
+                        console.log(chapterId);
+                        if(chapterId === chapterTotal){
+                            return;
+                        }
+                        chapterId++;
+                        getCurChapterContent(chapterId, Uicallback);
+                        Utils.storageSetter('chapterId',chapterId);
+                    };
+
+                    return {
+                        init: init,
+                        preChapter: preChapter,
+                        nextChapter: nextChapter
+                    }
                 }
-                function readerBaseFrame() {                                        /*View*/
+                function ReaderBaseFrame(container) {                                        /*View*/
                     //TODO 渲染基本UI结构，view层
+                    function parseChapterData(jsonData) {
+                        var jsonObj = JSON.parse(jsonData);
+                        var html = '<h4>' + jsonObj.t + '</h4>';
+                        for(var i = 0;i< jsonObj.p.length; i++){
+                            html += '<p>'+ jsonObj.p[i] +'</p>';
+                        }
+                        return html;
+                    }
+                    return function (data) {
+                        container.html(parseChapterData(data));
+                    }
+
                 }
-                function eventHandler() {                                          /*Controller*/
+                function EventHandler() {                                          /*Controller*/
                     //TODO 交互的事件绑定，control层
                     $('#article-action-mid').click(function () {
                         if(dom.topNav.css('display') == 'none'){
@@ -438,7 +564,8 @@
                     function changeBk(color) {
                         initBkColor = color;
                         dom.fictionContainer.css('background-color',colorToHex[initBkColor]);
-                        dom.fictionContainer.css('color',fontColorTOHex[initBkColor]);
+                        dom.buttonBar.css('background-color', colorToHex[initBkColor]);
+                        dom.fictionContainer.css('color',fontColorToHex[initBkColor]);
                         Utils.storageSetter('backgroundColor',initBkColor);
                     }
                     $('#color1').click(function () {
@@ -485,19 +612,34 @@
                             dom.dayStatusFont.text('夜间');
                         }
                     }
-                    dayFlag = Utils.storageGetter('dayFlag');
-                    dayStatusChange(dayFlag, true);
+                    dayFlag = Utils.storageGetter('dayFlag') === 'true';
+                    dayStatusChange(dayFlag, false);
                     $('#day-status').click(function () {
                         dayFlag = !dayFlag;
                         dayStatusChange(dayFlag, true);
                         Utils.storageSetter('dayFlag', dayFlag);
+                    });
+                    $('#prev_button').click(function () {
+                        readModel.preChapter(function (data) {
+                            readerUi(data);
+                        });
+                    });
+                    $('#next_button').click(function () {
+                        readModel.nextChapter(function (data) {
+                            readerUi(data);
+                        });
                     });
 
                 }
 
                 function main() {
                     //TODO 整个项目的入口函数
-                    eventHandler();
+                    readModel = ReadModel();
+                    readerUi =ReaderBaseFrame(dom.fictionContainer);
+                    readModel.init(function (data) {
+                        readerUi(data);
+                    });
+                    EventHandler();
                 }
 
                 main();

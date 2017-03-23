@@ -1,0 +1,84 @@
+<style>
+    .header-tab{
+        padding:0 90px;
+        text-align: center;
+        line-height: 44px;
+        background:#efeff0;
+        border-bottom:1px solid #ddd;
+        position:relative;
+    }
+    .header-tab a:before{
+        content: '书城';
+        display:block;
+        margin:0 auto;
+        width:2em;
+    }
+    .header-tab a:nth-child(2):before{
+        content: '书架';
+    }
+    .header-tab i{
+        bottom:-1px;
+    }
+    .header-tab i:before{
+        content:'';
+        display:block;
+        height:3px;
+        width: 34px;
+        margin:0 auto;
+        background:#777;
+    }
+    .header-user{
+        position:absolute;
+        right:0;
+        top:0;
+        width:44px;
+        height:44px;
+        background: url('/static/img/user.png') no-repeat center;
+        background-size:20px;
+    }
+    .header-checkIn{
+        position:absolute;
+        left:0;
+        top:0;
+        width:44px;
+        height:44px;
+        background: url('/static/img/checkIn.png') no-repeat center;
+        background-size:20px;
+    }
+    .swipe-tab{
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    .swipe-tab a{
+        float:left;
+        text-align: center;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+    .swipe-tab-2 a{
+        width: 50%;
+    }
+    .swipe-tab i{
+        position: absolute;
+        left: 0;
+        transition: transform 0.3s ease-out;
+    }
+    .f-cb ::after{
+        clear:both;
+        content:'';
+        display: block;
+        height: 0;
+        overflow:hidden;
+        visibility: hidden;
+    }
+
+</style>
+<div class="header-tab" id="app-header">
+    <div class="swipe-tab swipe-tab-2 f-cb">
+        <a href="javascript:"></a>
+        <a href="javascript:"></a>
+        <i style="width:50%; transition-duration: 0s; transform:translate3d(0,0,0);"></i>
+    </div>
+    <em class="header-user"></em>
+    <em class="header-checkIn"></em>
+</div>

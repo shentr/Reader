@@ -2,9 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>书缘首页</title>
+    <link rel="stylesheet" href="../static/css/reset.css">
 </head>
 <body>
-<%= title %>
+<div>
+    <div>
+        <%- include('./include/header.html') %>
+        <%- include('./include/index-top.html') %>
+        <%- include('./include/index-recommend.html') %>
+    </div>
+</div>
+
+
+
+<script src="../static/script/lib/zepto.min.js"></script>
+<script>
+    window.jQuery = $;
+</script>
+<script src="../static/script/lib/jquery.base64.js"></script>
+<script src="../static/script/lib/jquery.jsonp.js"></script>
 </body>
 </html>

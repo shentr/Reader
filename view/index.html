@@ -2,15 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
     <title>书缘首页</title>
     <link rel="stylesheet" href="../static/css/reset.css">
+    <style>
+        html,body,#root{
+            height:100%;
+        }
+        .container-wrap{
+            height:100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .container-scroll{
+            position: absolute;
+            top:45px;
+            bottom:0;
+            left:0;
+            right:0;
+            overflow: scroll;
+        }
+    </style>
 </head>
 <body>
-<div>
-    <div>
+<div id="root">
+    <div class="container-wrap">
         <%- include('./include/header.html') %>
-        <%- include('./include/index-top.html') %>
-        <%- include('./include/index-recommend.html') %>
+        <div class="container-scroll">
+            <%- include('./include/index-top.html') %>
+            <%- include('./include/index-hot.html') %>
+            <%- include('./include/index-recommend.html') %>
+            <%- include('./include/index-male.html') %>
+            <%- include('./include/index-female.html') %>
+            <%- include('./include/index-free.html') %>
+        </div>
     </div>
 </div>
 

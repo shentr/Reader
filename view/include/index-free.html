@@ -1,0 +1,143 @@
+<style>
+    .channel-group{
+        background: #fff;
+        border-bottom:10px solid #f5f5f5;
+        position: relative;
+    }
+    .channel-group-header{
+        position: relative;
+        padding:10px 14px;
+        border-bottom:1px solid #f0f0f0;
+        border-left:6px solid #ffab18;
+    }
+    .channel-group-title{
+        font-size: 16px;
+        font-weight:normal;
+        color: #333;
+    }
+    .book-table{
+        padding:13px 14px 5px;
+        font-size:0;
+    }
+    .book-table li{
+        width:33.3%;
+        display: inline-block;
+        //vertical-align: top;
+        line-height:1;
+        margin-bottom: 8px;
+    }
+    .u-book{
+        width:86px;
+        position: relative;
+        overflow: hidden;
+    }
+    .book-cover{
+        position: relative;
+        width:86px;
+        height: 113px;
+        background-color: #eeece9;
+        box-shadow: 0 6px 5px -3px #aaa;
+        border:1px solid #f0f0f0;
+        overflow: hidden;
+        border-bottom:none;
+    }
+    .book-cover img{
+        width:100%;
+        height:100%;
+    }
+    .title{
+        font-size: 13px;
+        line-height: 1.4em;
+        max-height: 2.8em;
+        overflow: hidden;
+        color: #8d8d8d;
+        margin-bottom: 0px;
+        font-weight:400;
+    }
+    .info{
+        padding:8px;
+    }
+    .u-tagRT{
+        position: absolute;
+        top:0;
+        right:0;
+        line-height: 1.6rem;
+        background-color: #ef6c2c;
+        color: #fff;
+        width:100%;
+        font-size: 1.4rem;
+        text-align: center;
+        transform-origin:top center;
+        transform: translateX(50%) rotate(45deg) translateY(50%) scale(0.6);
+    }
+    .u-tagRT.-freefition{
+        background: #49ab3f;
+    }
+    .u-tagRT.-freefition:before{
+        content:'限免';
+    }
+    .channel-group-footer{
+        display: block;
+        border-top:1px solid #f0f0f0;
+        text-align: center;
+        font-size: 14px;
+        padding:19px 0;
+    }
+</style>
+
+<section class="channel-group">
+    <div class="channel-group-header">
+        <h2 class="channel-group-title">限时免费</h2>
+    </div>
+    <ul class="book-table">
+        <li>
+            <div class="u-book">
+                <div class="book-cover">
+                    <img src="../../static/img/三生三世.jpg" />
+                    <div class="u-tagRT -freefition"></div>
+                </div>
+                <div class="info">
+                    <h3 class="title">三生三世</h3>
+                    这是一本书
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="u-book">
+                <div class="book-cover">
+                    <img src="../../static/img/三生三世.jpg" />
+                    <div class="u-tagRT -freefition"></div>
+                </div>
+                <div class="info">
+                    <h3 class="title">三生三世</h3>
+                    这是一本书
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="u-book">
+                <div class="book-cover">
+                    <img src="../../static/img/三生三世.jpg" />
+                    <div class="u-tagRT -freefition"></div>
+                </div>
+                <div class="info">
+                    <h3 class="title">三生三世</h3>
+                    这是一本书
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="u-book">
+                <div class="book-cover">
+                    <img src="../../static/img/三生三世.jpg" />
+                    <div class="u-tagRT -freefition"></div>
+                </div>
+                <div class="info">
+                    <h3 class="title">三生三世</h3>
+                    这是一本书
+                </div>
+            </div>
+        </li>
+    </ul>
+    <a href="/free" class="channel-group-footer">更多限免佳作&gt;&gt;</a>
+</section>

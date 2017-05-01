@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimal-ui">
 		<meta name="format-detection" content="telephone=no">
-		<link rel="stylesheet" href="static/css/reset.css">
+		<link rel="stylesheet" href="../static/css/reset.css">
 		<style type="text/css">
             html{
                 width:100%;
@@ -331,12 +331,12 @@
             </div>
 		</div>
 
-		<script src="static/script/lib/zepto.min.js"></script>
+		<script src="../static/script/lib/zepto.min.js"></script>
 		<script>
 			window.jQuery = $;
 		</script>
-		<script src="static/script/lib/jquery.base64.js"></script>
-		<script src="static/script/lib/jquery.jsonp.js"></script>
+		<script src="../static/script/lib/jquery.base64.js"></script>
+		<script src="../static/script/lib/jquery.jsonp.js"></script>
 
 
 
@@ -445,7 +445,7 @@
                         }, 'json');
                     });*/
                     var getFictionInfo = function (callback) {
-                        $.get('mock/book/chapter.json',function (data) {
+                        $.get('mock/reader/chapter.json',function (data) {
                             //TODO 获得章节后的回调
                             chapterId = Utils.storageGetter('chapterId');
                             chapterId = chapterId ? chapterId : data.chapters[1].chapter_id;
@@ -469,7 +469,7 @@
 
 
                     var getCurChapterContent = function (chapterId, callback) {
-                        $.get('mock/book/data' + chapterId + '.json',function (data) {
+                        $.get('mock/reader/data/data' + chapterId + '.json',function (data) {
                             if(data.result === 0){                      //状态:成功
                                 var url=data.jsonp;
                                 Utils.getJsonP(url, function (data) {

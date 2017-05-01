@@ -5,39 +5,21 @@
         </p>
     </div>
     <ul class="list-h5">
-        <li>
+        <li v-for="item in hot">
             <div class="book-h5">
                 <div class="book-h5-cover">
-                    <img src="../../static/img/三生三世.jpg"/>
+                    <img :src="item.cover" :alt="item.title"/>
                     <p class="book-h5-finish">完结</p>
                 </div>
                 <div class="book-h5-info">
-                    <p class="book-h5-title">书名</p>
-                    <p class="book-h5-author">作者</p>
-                    <p class="book-h5-summary">简介</p>
+                    <p class="book-h5-title">{{ item.title }}</p>
+                    <p class="book-h5-author">{{ item.authors }}</p>
+                    <p class="book-h5-summary">{{ item.summary }}</p>
                     <div class="book-h5-wrap">
-                        <div class="book-h5-tag">标签</div>
+                        <div class="book-h5-tag" v-for="tag in item.tags">{{ tag }}</div>
                     </div>
                 </div>
             </div>
         </li>
-        <li>
-            <div class="book-h5">
-                <div class="book-h5-cover">
-                    <img src="../../static/img/三生三世.jpg"/>
-                    <p class="book-h5-finish">完结</p>
-                </div>
-                <div class="book-h5-info">
-                    <p class="book-h5-title">书名</p>
-                    <p class="book-h5-author">作者</p>
-                    <p class="book-h5-summary">简介</p>
-                    <div class="book-h5-wrap">
-                        <div class="book-h5-tag">标签</div>
-                    </div>
-                </div>
-            </div>
-        </li>
-
-
     </ul>
 </section>

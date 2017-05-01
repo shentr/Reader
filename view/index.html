@@ -1,45 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="format-detection" content="telephone=no">
     <title>书缘首页</title>
     <link rel="stylesheet" href="../static/css/reset.css">
-    <style>
-        html,body,#root{
-            height:100%;
-        }
-        .container-wrap{
-            height:100%;
-            overflow: hidden;
-            position: relative;
-        }
-        .container-scroll{
-            position: absolute;
-            top:45px;
-            bottom:0;
-            left:0;
-            right:0;
-            overflow: scroll;
-        }
-    </style>
+    <link rel="stylesheet" href="../static/css/common.css">
 </head>
 <body>
-<div id="root">
-    <div class="container-wrap">
+
+<div id="app">
+    <div class="container-header" :style="screenWidth">
         <%- include('./include/header.html') %>
-        <div class="container-scroll">
-            <%- include('./include/index-top.html') %>
-            <%- include('./include/index-hot.html') %>
-            <%- include('./include/index-recommend.html') %>
-            <%- include('./include/index-male.html') %>
-            <%- include('./include/index-female.html') %>
-            <%- include('./include/index-free.html') %>
+    </div>
+    <div class="container-translate" :style="containerTranslateStyle">
+        <div class="container-wrap" :style="screenWidth">
+            <div class="container-scroll">
+                <%- include('./include/index-top.html') %>
+                <%- include('./include/index-hot.html') %>
+                <%- include('./include/index-recommend.html') %>
+                <%- include('./include/index-male.html') %>
+                <%- include('./include/index-female.html') %>
+                <%- include('./include/index-free.html') %>
+            </div>
+        </div>
+        <div class="container-wrap" :style="screenWidth">
+            <div class="container-scroll">
+                <%- include('./include/index-shelf.html') %>
+            </div>
         </div>
     </div>
 </div>
-
 
 
 <script src="../static/script/lib/zepto.min.js"></script>
@@ -48,5 +40,7 @@
 </script>
 <script src="../static/script/lib/jquery.base64.js"></script>
 <script src="../static/script/lib/jquery.jsonp.js"></script>
+<script src="https://unpkg.com/vue@2.3.0/dist/vue.js"></script>
+<script src="../static/script/pages/index.js"></script>
 </body>
 </html>
